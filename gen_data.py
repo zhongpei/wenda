@@ -22,14 +22,15 @@ for file in files:
     with open(cut_file, 'w',encoding='utf-8') as f:   
         f.write(data)
         f.close()
-loader = DirectoryLoader('txt_out',glob='**/*.txt')
+loader = DirectoryLoader('txt_out',glob='**/*.pdf')
 docs = loader.load()
 # text_splitter = TokenTextSplitter(chunk_size=500, chunk_overlap=15)
 text_splitter = CharacterTextSplitter(chunk_size=800, chunk_overlap=20,separator='\n')
 doc_texts = text_splitter.split_documents(docs)
 # print(doc_texts)
-model_name = "sentence-transformers/text2vec-base-chinese"
-# model_name = "sentence-transformers/simcse-chinese-roberta-wwm-ext"
+# model_name = "GanymedeNil/text2vec-base-chinese"
+# model_name = "sentence-transformers/text2vec-base-chinese"
+model_name = "E:\gpt\wenda\sentence-transformers\simcse-chinese-roberta-wwm-ext"
 # model_name = "ACGVoc2vec"
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name=model_name)

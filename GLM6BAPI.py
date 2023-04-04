@@ -135,7 +135,7 @@ def load_model():
     mutex.acquire()
     当前用户=['模型加载中','','']
     from transformers import AutoModel, AutoTokenizer
-    model_path="model/chatglm-6b-int4"
+    model_path="E:\gpt\wenda\model\chatglm-6b-int4-qe"
     tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True, trust_remote_code=True)
     model = AutoModel.from_pretrained(model_path, local_files_only=True, trust_remote_code=True)
     model = model.half()
@@ -145,8 +145,8 @@ def load_model():
 thread_load_model = threading.Thread(target=load_model)
 thread_load_model.start()
 
-model_name = "sentence-transformers/text2vec-base-chinese"
-# model_name = "sentence-transformers/simcse-chinese-roberta-wwm-ext"
+# model_name = "GanymedeNil/text2vec-base-chinese"
+model_name = "E:\gpt\wenda\sentence-transformers/simcse-chinese-roberta-wwm-ext"
 # model_name = "ACGVoc2vec"
 from langchain.embeddings import HuggingFaceEmbeddings
 embeddings = HuggingFaceEmbeddings(model_name=model_name)
@@ -199,4 +199,4 @@ def init_agent():
     return qa
 qa=init_agent()
 bottle.debug(True)
-bottle.run(server='paste',port=17860,quiet=True)
+bottle.run(server='paste',host="0.0.0.0",port=17860,quiet=True)
